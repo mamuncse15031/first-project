@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Alert, AlertTitle } from '@material-ui/lab';
+import { Alert } from '@material-ui/lab';
 
 const Copyright = () => {
   return (
@@ -48,6 +48,10 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  root: {
+    marginBottom: '20px',
+    width: '100%',
+  },
 }));
 
 const Signup = () => {
@@ -57,13 +61,52 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [promotions, setPromotions] = useState(false);
   const [errorMessege, setErrorMessege] = useState('');
-  const [empty, setEmpty] = useState(false);
+  const [successmessege, setSuccessMessege] = useState('');
+
+  let emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const classes = useStyles();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert('Form Submitted');
+    //Check all fields are empty or not
+    if (!firstname && !lastname && !email && !password) {
+      setErrorMessege('All Fields Required');
+      //setEmpty(true);
+    } else {
+      //Every input is empty or not individually
+      if (!firstname) {
+        setErrorMessege('First Name is Required');
+      } else {
+        if (!lastname) {
+          setErrorMessege('Last Name is Required');
+        } else {
+          if (!email) {
+            setErrorMessege('Email is Required');
+          } else {
+            //Email Validation
+            if (!email.match(emailRegex)) {
+              setErrorMessege('Enter a Valid Email!!!!');
+            } else {
+              if (!password) {
+                setErrorMessege('Password is Required');
+              } else {
+                setErrorMessege(false);
+                setFirstName('');
+                setLastName('');
+                setEmail('');
+                setPassword('');
+                setPromotions(false);
+                setSuccessMessege('Congratz!!! Go to Login');
+                setTimeout(() => {
+                  setSuccessMessege('');
+                }, 2000);
+              }
+            }
+          }
+        }
+      }
+    }
   };
 
   return (
@@ -80,6 +123,24 @@ const Signup = () => {
         </Typography>
 
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
+          {/* Error Messege Alert */}
+          {errorMessege ? (
+            <Alert className={classes.root} severity='error'>
+              {errorMessege}
+            </Alert>
+          ) : (
+            ''
+          )}
+
+          {/* Success Messege Alertt */}
+          {successmessege ? (
+            <Alert className={classes.root} severity='success'>
+              {successmessege}
+            </Alert>
+          ) : (
+            ''
+          )}
+
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField

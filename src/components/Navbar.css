@@ -36,6 +36,13 @@ nav .nav-links a {
   cursor: pointer;
 }
 
+nav .nav-links Link {
+  font-size: 18px;
+  font-weight: normal;
+  color: #fff;
+  cursor: pointer;
+}
+
 nav .bar {
   font-size: 28px;
   display: none;
@@ -78,6 +85,10 @@ nav .nav-links a:hover {
   }
 
   nav .nav-links a:hover {
+    border-bottom: 0px solid #fff;
+  }
+
+  nav .nav-links Link:hover {
     border-bottom: 0px solid #fff;
   }
 }
