@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Navbar.css';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -23,9 +23,7 @@ const Navbar = () => {
             <a>Contacts</a>
           </li>
           <li>
-            <Router>
-              <Link to='/login'>Login</Link>
-            </Router>
+            <Link to='/login'>Login</Link>
           </li>
         </ul>
         <i onClick={() => setOpen(!open)} className='fas fa-bars bar'></i>
@@ -35,4 +33,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);

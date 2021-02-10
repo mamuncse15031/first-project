@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Alert } from '@material-ui/lab';
+import { withRouter } from 'react-router-dom';
 
 const Copyright = () => {
   return (
@@ -240,4 +241,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default withRouter(Signup);
